@@ -15,12 +15,16 @@ description: 将前端实现、UI 优化、编码、评审以及图片生成/编
 - 提示词保持聚焦，通常不超过 500 个英文单词或等量中文。不要粘贴文件内容；用 `--file` 传入 1–4 个有效入口文件，wrapper 会把路径作为起始上下文。
 - 使用随 skill 提供的 wrapper，不要直接调用 `grok`。wrapper 会保存输出、会话 ID 和转录记录。
 
+将当前 `SKILL.md` 所在绝对目录记为 `SKILL_DIR`；在任务工作区运行时仍使用此目录定位脚本。
+
+将当前 `SKILL.md` 所在绝对目录记为 `SKILL_DIR`；在任务工作区运行时仍使用此目录定位脚本。
+
 ## 运行 Grok
 
 macOS/Linux：
 
 ```bash
-~/.codex/skills/grok/scripts/ask_grok.sh "优化设置页前端并保持现有行为" \
+"$SKILL_DIR"/scripts/ask_grok.sh "优化设置页前端并保持现有行为" \
   --workspace /path/to/project \
   --file src/pages/Settings.tsx \
   --file src/styles/tokens.css
@@ -29,7 +33,7 @@ macOS/Linux：
 读取 `output_path` 指向的文件；后续任务保存并复用 `session_id`：
 
 ```bash
-~/.codex/skills/grok/scripts/ask_grok.sh "继续收紧移动端布局" \
+"$SKILL_DIR"/scripts/ask_grok.sh "继续收紧移动端布局" \
   --workspace /path/to/project \
   --session <session_id>
 ```
@@ -67,7 +71,7 @@ elapsed=<seconds>s
 示例：
 
 ```bash
-~/.codex/skills/grok/scripts/ask_grok.sh \
+"$SKILL_DIR"/scripts/ask_grok.sh \
   "调用 image_gen 生成一张无文字的 16:9 编辑插画，把最终图片保存或转换到 /absolute/path/hero.png，并报告该路径。" \
   --workspace /path/to/project
 ```
@@ -75,7 +79,7 @@ elapsed=<seconds>s
 需要透明背景时，先要求纯 `#808080` 背景并保存原图，再执行：
 
 ```bash
-python3 ~/.codex/skills/grok/scripts/cutout.py raw.png final.png
+python3 "$SKILL_DIR"/scripts/cutout.py raw.png final.png
 ```
 
 确认最终文件是 RGBA。外观驱动的图像使用图片生成；精确文字、图表、表格和技术图使用 HTML/CSS 或 SVG 构建并进行视觉检查。

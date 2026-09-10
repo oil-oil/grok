@@ -130,3 +130,15 @@ SVG 图标来自 [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Gro
 ## License
 
 MIT
+
+## 配置、依赖与使用边界
+
+需要 Grok CLI 与其认证；脚本从实际 Skill 目录解析，非固定宿主安装位置。无需为此包装 Skill 新建一份凭据。
+
+只在用户明确选择 Grok 时使用；文件与图像会交给该工具处理。交付前核对产物与测试结果，不能仅转述工具的成功声明。
+
+使用示例：
+
+```text
+用 Grok 检查这个页面的布局问题。
+```
